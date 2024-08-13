@@ -1,0 +1,10 @@
+# ignore these folders
+/myInput
+/myOutput
+
+# ignore these types
+*.png
+*.jpg
+*.jpeg
+# *.txt
+*.pyc
