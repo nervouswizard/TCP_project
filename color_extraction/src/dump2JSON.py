@@ -22,7 +22,7 @@ def dump(filename):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='image to json')
     
-    parser.add_argument('--base_dir_in', type=str, default='/home/gliamanti/myApps/FSCS/color-extraction/imgs/test/', help='Base input directory')
+    parser.add_argument('--base_dir_in', type=str, default=os.path.join('..', 'imgs', 'test'), help='Base input directory')
     
     args = parser.parse_args()
     
