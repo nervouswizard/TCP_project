@@ -2,10 +2,10 @@ import bpy
 import os
 import math
 
-base_path = '/home/gliamanti/下載/squirrel_new/' ### image name
-layer_dir = base_path + 'layer/'
-alpha_dir = base_path + 'alpha/'
-background_dir = base_path + 'background/'
+base_path = os.path.join('squirrel_new') ### image name
+layer_dir = os.path.join(base_path + 'layer')
+alpha_dir = os.path.join(base_path + 'alpha')
+background_dir = os.path.join(base_path + 'background')
 # project_name = 'human'
 
 layer_num = 10  ### mask number
