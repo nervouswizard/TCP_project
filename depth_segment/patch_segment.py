@@ -39,32 +39,33 @@ def get_patch(layer_path, alpha_path, mask):
     return patch, patch_alpha
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Layer and alpha images segmentation')
+    # parser = argparse.ArgumentParser(description='Layer and alpha images segmentation')
     
-    parser.add_argument('--layer_dir', type=str, default='./myInput/layer/', required=True, help='Layer directory')
-    parser.add_argument('--mask_dir', type=str, default='./myInput/mask/', required=True, help='Mask directory')
-    parser.add_argument('--alpha_dir', type=str, default='./myInput/alpha/', required=True, help='Alpha directory')
-    parser.add_argument('--base_dir_out', type=str, default='./myOutput/', required=True, help='Base output directory')
+    # parser.add_argument('--layer_dir', type=str, default='./myInput/layer/', required=True, help='Layer directory')
+    # parser.add_argument('--mask_dir', type=str, default='./myInput/mask/', required=True, help='Mask directory')
+    # parser.add_argument('--alpha_dir', type=str, default='./myInput/alpha/', required=True, help='Alpha directory')
+    # parser.add_argument('--base_dir_out', type=str, default='./myOutput/', required=True, help='Base output directory')
     
-    parser.add_argument('--input_name', type=str, default='human', required=True, help='Input name')
+    # parser.add_argument('--input_name', type=str, default='human', required=True, help='Input name')
     
-    args = parser.parse_args()
+    # args = parser.parse_args()
     
-    dir_name = args.input_name
-    layer_dir = args.layer_dir + dir_name + '/'
-    mask_dir = args.mask_dir + dir_name + '/'
-    alpha_dir = args.alpha_dir + dir_name + '/'
+    # dir_name = args.input_name
+    # layer_dir = args.layer_dir + dir_name + '/'
+    # mask_dir = args.mask_dir + dir_name + '/'
+    # alpha_dir = args.alpha_dir + dir_name + '/'
+    # base_dir_out = args.base_dir_out
     
     # for debugging
-    # dir_name = 'human'
-    # layer_dir = './myInput/layer/' + dir_name + '/'
-    # mask_dir = './myInput/mask/' + dir_name + '/'
-    # alpha_dir = './myInput/alpha/' + dir_name + '/'
-    # base_dir_out = './myOutput/'
+    dir_name = 'squirrel'
+    layer_dir = os.path.join('myInput', 'layer', dir_name)
+    mask_dir = os.path.join('myInput', 'mask', dir_name)
+    alpha_dir = os.path.join('myInput', 'alpha', dir_name)
+    base_dir_out = 'myOutput'
     
-    base_dir_out = args.base_dir_out
-    patch_output_dir = base_dir_out + 'patch/' + dir_name + '/'
-    patch_alpha_output_dir = base_dir_out + 'patch_alpha/' + dir_name + '/'
+    
+    patch_output_dir = os.path.join(base_dir_out, 'patch', dir_name)
+    patch_alpha_output_dir = os.path.join(base_dir_out, 'patch_alpha', dir_name)
     
     myLayers = []
     
