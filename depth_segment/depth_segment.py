@@ -50,32 +50,32 @@ def get_label_mask(segmentation, output_path):
                 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Depth map segmentation')
+    # parser = argparse.ArgumentParser(description='Depth map segmentation')
     
-    parser.add_argument('--base_dir_in', type=str, default='./myInput/depth/', required=True, help='Base input directory')
-    parser.add_argument('--base_dir_out', type=str, default='./myOutput/mask/', required=True, help='Base output directory')
-    parser.add_argument('--input_name', type=str, default='human', required=True, help='Input name')
-    parser.add_argument('--num_groups', type=int, default=10, help='Number of groups')
-    parser.add_argument('--threshold', type=int, default=10000, help='Background threshold')
+    # parser.add_argument('--base_dir_in', type=str, default='./myInput/depth/', required=True, help='Base input directory')
+    # parser.add_argument('--base_dir_out', type=str, default='./myOutput/mask/', required=True, help='Base output directory')
+    # parser.add_argument('--input_name', type=str, default='human', required=True, help='Input name')
+    # parser.add_argument('--num_groups', type=int, default=10, help='Number of groups')
+    # parser.add_argument('--threshold', type=int, default=10000, help='Background threshold')
     
-    args = parser.parse_args()
+    # args = parser.parse_args()
     
-    base_dir_in = args.base_dir_in
-    base_dir_out = args.base_dir_out
-    dir_name = args.input_name
-    num_groups = args.num_groups
-    threshold = args.threshold
+    # base_dir_in = args.base_dir_in
+    # base_dir_out = args.base_dir_out
+    # dir_name = args.input_name
+    # num_groups = args.num_groups
+    # threshold = args.threshold
     # for debugging
-    # base_dir_in = './myInput/depth/'
-    # base_dir_out = './myOutput/mask/'
-    # dir_name = 'rooster'
-    # num_groups = 10
-    # threshold = 10000
+    base_dir_in = os.path.join('myInput', 'depth')
+    base_dir_out = os.path.join('myOutput', 'mask')
+    dir_name = 'squirrel'
+    num_groups = 10
+    threshold = 10000
     
     
     
-    input_path = base_dir_in + dir_name + '.png'
-    output_path = base_dir_out + dir_name + '/'
+    input_path = os.path.join(base_dir_in, dir_name+'.png')
+    output_path = os.path.join(base_dir_out, dir_name)
     
     # 使用 try 建立目錄
     try:
