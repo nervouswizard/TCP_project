@@ -134,5 +134,5 @@ if __name__ == "__main__":
             full_alpha_path = mylayer.get_alpha_path()
             
             patch, patch_alpha = get_patch(full_layer_path, full_alpha_path, mask)
-            cv2.imwrite(patch_output_dir +  'layer_' + str(masks_index+1) + '-' + str(mylayer_index+1) + '.png', patch)
-            cv2.imwrite(patch_alpha_output_dir + 'alpha_' + str(masks_index+1) + '-' + str(mylayer_index+1) + '.png', patch_alpha)
+            cv2.imwrite(os.path.join(patch_output_dir, 'layer_' + str(masks_index+1) + '-' + str(mylayer_index+1) + '.png'), patch)
+            cv2.imwrite(os.path.join(patch_alpha_output_dir, 'alpha_' + str(masks_index+1) + '-' + str(mylayer_index+1) + '.png'), patch_alpha)

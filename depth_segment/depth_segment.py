@@ -46,7 +46,7 @@ def get_label_mask(segmentation, output_path):
         mask = np.where(segmentation==i, 255, 0).astype('uint8')
         image = Image.fromarray(mask)
         
-        image.save(output_path + 'mask_' + str(i) +'.png')
+        image.save(os.path.join(output_path, 'mask_' + str(i) +'.png'))
                 
 
 if __name__ == "__main__":
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     base_dir_out = os.path.join('myOutput', 'mask')
     dir_name = 'squirrel'
     num_groups = 10
-    threshold = 10000
+    threshold = 0
     
     
     
