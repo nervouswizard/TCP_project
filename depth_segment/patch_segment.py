@@ -57,7 +57,7 @@ if __name__ == "__main__":
     # base_dir_out = args.base_dir_out
     
     # for debugging
-    dir_name = 'squirrel'
+    dir_name = 'test'
     layer_dir = os.path.join('myInput', 'layer', dir_name)
     mask_dir = os.path.join('myInput', 'mask', dir_name)
     alpha_dir = os.path.join('myInput', 'alpha', dir_name)
