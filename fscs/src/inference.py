@@ -158,7 +158,7 @@ bound_flag = True
 # img_name = 'Kim_Jisoo.jpg'; manual_color_0 = [175, 202, 211]; manual_color_1 = [28, 24, 23]; manual_color_2 = [211, 166, 151]; manual_color_3 = [115, 145, 145]; manual_color_4 = [229, 214, 205]; manual_color_5 = [174, 117, 90]; manual_color_6 = [89, 53, 43]; 
 
 ### octree
-img_name = 'test.png'; manual_color_0 = [239, 238, 234]; manual_color_1 = [97, 109, 108]; manual_color_2 = [197, 87, 101]; manual_color_3 = [180, 139, 116]; manual_color_4 = [122, 135, 135]; manual_color_5 = [55, 74, 82]; manual_color_6 = [214, 109, 139];
+img_name = 'rooster.png'; manual_color_0 = [249, 239, 233]; manual_color_1 = [61, 59, 59]; manual_color_2 = [164, 74, 77]; manual_color_3 = [155, 155, 152]; manual_color_4 = [180, 139, 112]; manual_color_5 = [219, 165, 151]; manual_color_6 = [100, 119, 132];
 # img_name = 'squirrel.png'; manual_color_0 = [239, 238, 234]; manual_color_1 = [97, 109, 108]; manual_color_2 = [197, 87, 101]; manual_color_3 = [180, 139, 116]; manual_color_4 = [122, 135, 135]; manual_color_5 = [55, 74, 82]; manual_color_6 = [214, 109, 139];
 # img_name = 'bluebird.png'; manual_color_0 = [254, 254, 254]; manual_color_1 = [148, 157, 173]; manual_color_2 = [157, 176, 204]; manual_color_3 = [87, 85, 88]; manual_color_4 = [246, 210, 167]; manual_color_5 = [110, 138, 174]; manual_color_6 = [181, 199, 221];
 # img_name = 'human.png'; manual_color_0 = [245, 236, 227]; manual_color_1 = [162, 155, 148]; manual_color_2 = [38, 34, 31]; manual_color_3 = [99, 93, 87]; manual_color_4 = [215, 197, 175]; manual_color_5 = [138, 131, 124]; manual_color_6 = [203, 187, 170];

@@ -4,3 +4,5 @@ squirrel.png
 myOutput/
 myInput/
 *.png
+color_extraction/imgs/test/
+color_extraction/output/
