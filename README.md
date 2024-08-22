@@ -1,6 +1,7 @@
 # 基於擴散模型方法生成 2.5 維國畫視覺藝術
 
-From [PJ_TCP_project](https://github.com/GliAmanti/TCP_project)
+From [PJ_TCP_project](https://github.com/GliAmanti/TCP_project)  
+Notion link: [Notion](https://dynamic-guitar-7bc.notion.site/2-5D-TCP-Visual-Art-For-Others-8b1005e21a524fdab62847301f6d604b)
 
 ## Environment
 
