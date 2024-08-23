@@ -68,8 +68,8 @@ if __name__ == "__main__":
     # for debugging
     base_dir_in = os.path.join('myInput', 'depth')
     base_dir_out = os.path.join('myOutput', 'mask')
-    dir_name = 'rooster'
-    num_groups = 10
+    dir_name = 'human'
+    num_groups = 5
     threshold = 0
     
     
