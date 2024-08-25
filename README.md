@@ -66,51 +66,42 @@ Any inpainting method which can remove the signature and stamp is fine. I use [i
 - Clone the project, which includes the code of **Layer Decomposition**, **Layer Ordering** and **2.5D Model Generation.**
     
     ```powershell
-    git clone git@github.com:GliAmanti/TCP_project.git
+    git clone https://github.com/nervouswizard/TCP_project.git
     ```
     
 - Create a virtual environment and install packages for project `fscs`.
     
     ```powershell
-    conda create --name TCP_project python=3.8
-    
-    cd fscs
-    conda env create -f environment.yml
+    python -m venv virtual
+    virtual\Scripts\activate
+    pip install -r requirements.txt
     ```
-    <img src="https://github.com/user-attachments/assets/aa23d93a-1280-4b3a-8abe-c2132699e5f0">
 
-### [Color Extraction](https://github.com/GliAmanti/OctreeColorExtraction)
+### [Color Extraction]
 
 - [Install deno package](https://nugine.github.io/deno-manual-cn/getting_started/installation.html)
 
-- Put TCP image into folder `imgs/test`,  and run the following command to get the **primary colors** of the image in `txt` format.
+- Put TCP image into folder `data/1_color_extraction_input`,  and run the following command to get the **primary colors** of the image in `txt` format.
     
     ```powershell
-    cd color-extraction/src
+    cd src/1_color_extraction
     
     python dump2JSON.py # output the json file first
     deno run -A octree.ts
     ```
-    octree.ts輸出在 color-extraction/output/圖片名稱.txt
 
     💡 The content of output file will be like this:
     
     ```
     img_name = 'squirrel.png'; manual_color_0 = [239, 238, 234]; manual_color_1 = [97, 109, 108]; manual_color_2 = [197, 87, 101]; manual_color_3 = [180, 139, 116]; manual_color_4 = [122, 135, 135]; manual_color_5 = [55, 74, 82]; manual_color_6 = [214, 109, 139];
     ```
-    
-    
-    <img src="https://github.com/user-attachments/assets/0e421ee0-2ed6-4ee5-80fd-6071533748a6">
-    
-    <img src="https://github.com/user-attachments/assets/61aced6e-f6c9-4c35-ab6f-a3aa2ec8ec81">
 
-- Put TCP image into folder `fscs/myInput`, placing its mask in folder `fscs/myInput/mask`. Paste the primary colors into  `fscs/src/inference.py`.  
+
+- Put TCP image into folder `data/2_fscs_input`, placing its mask in folder `data/2_fscs_input/mask`. Paste the primary colors into  `src/fscs/inference.py`.  
 mask 的檔名需要做相對應的更改
     ```python
     mask_path = '../myInput/mask/'+ os.path.splitext(img_name)[0] + '_mask.png'
     ```
-    
-    <img src="https://github.com/user-attachments/assets/81c7e042-7a97-4c29-ac58-ed0209c2836c">
     
     <img src="https://github.com/user-attachments/assets/23aa9187-9b9d-4a39-a389-e4f18cde024f">
 
@@ -120,8 +111,6 @@ mask 的檔名需要做相對應的更改
     ```powershell
     python inference.py
     ```
-    
-    <img src="https://github.com/user-attachments/assets/15f3506b-1f6e-41ac-a171-b6a7dd8a4357">
 
 ## Depth Map Generation
 
@@ -219,24 +208,25 @@ python generate_image.py --config "./configs/hyperparameter.yaml"
 
 ## Layer Ordering
 
-- `Local` Enter the folder `depth_segment`.
-```powershell
-cd depth_segment
-```
+ Run at `Local`
 
 上一步跑出來的結果`output_dir`內選一張深度圖下載到local  
-放入`TCP_project/depth-segment/myInput/depth  
+放入`TCP_project/3_depth_segment_input/depth  
 改名為圖片本身的名字
 
-創建資料夾`TCP_project/depth-segment/myInput/alpha/圖片名稱`  
-創建資料夾`TCP_project/depth-segment/myInput/layer/圖片名稱`  
+執行 transfer_file.py
 
-把`fscs/src/results/sample/圖片名稱.png`資料夾內的alpha(七個圖片檔)  
+transfer_file.py會把`fscs/src/results/sample/圖片名稱.png`資料夾內的alpha(七個圖片檔)  
 複製至`TCP_project/depth-segment/myInput/alpha/圖片名稱`  
 proc alpha 是較為平滑的alpha，論文就是用proc  
 
 把`fscs/src/results/sample/圖片名稱.png`資料夾內的img_layer(七個圖片檔)  
 複製至`TCP_project/depth-segment/myInput/layer/圖片名稱`
+
+
+```powershell
+python src/transfer_file.py
+```
 
 調整`depth_segment/depth_segment.py`  
 調整threshold  
@@ -249,26 +239,15 @@ proc alpha 是較為平滑的alpha，論文就是用proc
 更改dir_name  
 跑patch_segment.py
 
-- Rename the refined depth map and put it into `myInput/depth`, run the following command to get **mask group** in folder `myOutput/mask`.
+- run the following command to get **mask group** in folder `data/3_depth_segment_output/mask`.
 
 ```powershell
-python depth_segment.py \
-	--base_dir_in './myInput/depth/' \
-	--base_dir_out './myOutput/mask/' \
-	--num_groups 10 \
-	--threshold 10000 \
-	--input_name 'human'
+python depth_segment.py
 ```    
-- Put the RGBA and alpha layers into `myInput/layer` and  `myInput/alpha`, and run the following command to get **RGBA and alpha patches** in `myOutput/patch` and `myOutput/patch_alpha`.
+- run the following command to get **RGBA and alpha patches** in `data/3_depth_segment_output/patch` and `data/3_depth_segment_output/patch_alpha`.
 ```powershell
-python patch_segment.py \
-	--layer_dir './myInput/layer/' \
-	--mask_dir './myInput/mask/' \
-	--alpha_dir './myInput/alpha/' \
-	--base_dir_out './myOutput/'\
-	--input_name 'human'
+python patch_segment.py 
 ```
-<img src="https://github.com/user-attachments/assets/8aafa4ea-9bd1-4de1-b6cb-b44e6dfd0e15">
 
 ## 2.5D Model Generation
 
