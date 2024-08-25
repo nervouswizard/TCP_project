@@ -3,19 +3,21 @@ from torch.utils.data.dataset import Dataset
 import cv2
 import pandas as pd
 import numpy as np
+import os
 
 class MyDataset(Dataset):
-    def __init__(self, csv_path, num_primary_color, mode=None):
+    def __init__(self, csv_path, csv_name, num_primary_color, mode=None):
         self.csv_path = csv_path
+        self.csv_name = csv_name
         if mode == 'train':
-            self.imgs_path = np.array(pd.read_csv(csv_path, header=None)).reshape(-1)[:-10] #csvリストの後ろをvaldataに
-            self.palette_list = np.array(pd.read_csv('palette_%d_%s' % (num_primary_color, csv_path), header=None)).reshape(-1, num_primary_color*3)[:-10]
+            self.imgs_path = np.array(pd.read_csv(os.path.join(csv_path, csv_name), header=None)).reshape(-1)[:-10] #csvリストの後ろをvaldataに
+            self.palette_list = np.array(pd.read_csv(os.path.join(csv_path, 'palette_%d_%s' % (num_primary_color, csv_name)), header=None)).reshape(-1, num_primary_color*3)[:-10]
         if mode == 'val':
-            self.imgs_path = np.array(pd.read_csv(csv_path, header=None)).reshape(-1)[-10:]
-            self.palette_list = np.array(pd.read_csv('palette_%d_%s' % (num_primary_color, csv_path), header=None)).reshape(-1, num_primary_color*3)[-10:]
+            self.imgs_path = np.array(pd.read_csv(os.path.join(csv_path, csv_name), header=None)).reshape(-1)[-10:]
+            self.palette_list = np.array(pd.read_csv(os.path.join(csv_path, 'palette_%d_%s' % (num_primary_color, csv_name)), header=None)).reshape(-1, num_primary_color*3)[-10:]
         if mode == 'test':
-            self.imgs_path = np.array(pd.read_csv(csv_path, header=None)).reshape(-1)
-            self.palette_list = np.array(pd.read_csv('palette_%d_%s' % (num_primary_color, csv_path), header=None)).reshape(-1, num_primary_color*3)
+            self.imgs_path = np.array(pd.read_csv(os.path.join(csv_path, csv_name), header=None)).reshape(-1)
+            self.palette_list = np.array(pd.read_csv(os.path.join(csv_path, 'palette_%d_%s' % (num_primary_color, csv_name)), header=None)).reshape(-1, num_primary_color*3)
 
         self.num_primary_color = num_primary_color
 

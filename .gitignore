@@ -1,8 +1,4 @@
 virtual/
-__pycache__/
-squirrel.png
-myOutput/
-myInput/
+*__pycache__
 *.png
-color_extraction/imgs/test/
-color_extraction/output/
+data/

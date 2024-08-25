@@ -1,7 +1,6 @@
 # region import
 from __future__ import print_function
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
 import argparse
 import numpy as np
 import torch
@@ -19,6 +18,10 @@ import time
 
 from guided_filter_pytorch.guided_filter import GuidedFilter
 # endregion
+
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 def proc_guidedfilter(alpha_layers, guide_img):
     # guide_imgは， 1chのモノクロに変換
@@ -71,7 +74,7 @@ def alpha_normalize(alpha_layers):
     return alpha_layers / (alpha_layers.sum(dim=1, keepdim=True) + 1e-8)
 
 def read_backimage():
-    img = cv2.imread('../dataset/backimage.jpg')
+    img = cv2.imread(os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'dataset', 'backimage.jpg'))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = img.transpose((2,0,1))
     img = img/255
@@ -132,7 +135,8 @@ def my_mask_operate(alpha_layers, mask_path):
 run_name = 'sample'
 num_primary_color = 7 
 # num_primary_color = 6 
-csv_path = 'my_test.csv' # なんでも良い．後方でパスを置き換えるから
+csv_path = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'model') # なんでも良い．後方でパスを置き換えるから
+csv_name = 'my_test.csv'
 resize_scale_factor = 1
 
 boost_scale = 1
@@ -159,8 +163,8 @@ bound_flag = True
 
 ### octree
 # img_name = 'bluebird.png'; manual_color_0 = [254, 254, 254]; manual_color_1 = [148, 157, 173]; manual_color_2 = [157, 176, 204]; manual_color_3 = [87, 85, 88]; manual_color_4 = [246, 210, 167]; manual_color_5 = [110, 138, 174]; manual_color_6 = [181, 199, 221];
-img_name = 'human.png'; manual_color_0 = [245, 236, 227]; manual_color_1 = [162, 155, 148]; manual_color_2 = [38, 34, 31]; manual_color_3 = [99, 93, 87]; manual_color_4 = [215, 197, 175]; manual_color_5 = [138, 131, 124]; manual_color_6 = [203, 187, 170];
-# img_name = 'lotus.png'; manual_color_0 = [206, 207, 206]; manual_color_1 = [169, 169, 168]; manual_color_2 = [57, 51, 48]; manual_color_3 = [152, 65, 74]; manual_color_4 = [156, 143, 91]; manual_color_5 = [190, 192, 190]; manual_color_6 = [190, 192, 192];
+# img_name = 'human.png'; manual_color_0 = [245, 236, 227]; manual_color_1 = [162, 155, 148]; manual_color_2 = [38, 34, 31]; manual_color_3 = [99, 93, 87]; manual_color_4 = [215, 197, 175]; manual_color_5 = [138, 131, 124]; manual_color_6 = [203, 187, 170];
+img_name = 'lotus.png'; manual_color_0 = [206, 207, 206]; manual_color_1 = [169, 169, 168]; manual_color_2 = [57, 51, 48]; manual_color_3 = [152, 65, 74]; manual_color_4 = [156, 143, 91]; manual_color_5 = [190, 192, 190]; manual_color_6 = [190, 192, 192];
 # img_name = 'rooster.png'; manual_color_0 = [249, 239, 233]; manual_color_1 = [61, 59, 59]; manual_color_2 = [164, 74, 77]; manual_color_3 = [155, 155, 152]; manual_color_4 = [180, 139, 112]; manual_color_5 = [219, 165, 151]; manual_color_6 = [100, 119, 132];
 # img_name = 'rosemaling.png'; manual_color_0 = [251, 251, 244]; manual_color_1 = [69, 80, 72]; manual_color_2 = [218, 152, 69]; manual_color_3 = [156, 166, 160]; manual_color_4 = [173, 107, 49]; manual_color_5 = [114, 139, 138]; manual_color_6 = [232, 209, 167];
 # img_name = 'buffalo.png'; manual_color_0 = [243, 246, 247]; manual_color_1 = [84, 91, 107]; manual_color_2 = [13, 23, 49]; manual_color_3 = [39, 52, 73]; manual_color_4 = [149, 156, 169]; manual_color_5 = [112, 119, 136]; manual_color_6 = [57, 69, 88];
@@ -172,19 +176,18 @@ img_name = 'human.png'; manual_color_0 = [245, 236, 227]; manual_color_1 = [162,
 # img_name = 'sparrow.png'; manual_color_0 = [250, 250, 251]; manual_color_1 = [154, 160, 169]; manual_color_2 = [73, 73, 89]; manual_color_3 = [213, 87, 191]; manual_color_4 = [230, 159, 223]; manual_color_5 = [182, 202, 202]; manual_color_6 = [111, 114, 138];
 # img_name = 'squirrel.png'; manual_color_0 = [239, 238, 234]; manual_color_1 = [97, 109, 108]; manual_color_2 = [197, 87, 101]; manual_color_3 = [180, 139, 116]; manual_color_4 = [122, 135, 135]; manual_color_5 = [55, 74, 82]; manual_color_6 = [214, 109, 139];
 
-
 target_layer_number = [0, 1] # マスクで操作するレイヤーの番号
-mask_path = '../myInput/mask/'+ os.path.splitext(img_name)[0] + '_mask.png'
+mask_path = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'mask', os.path.splitext(img_name)[0] + '_mask.png')
 print(mask_path)
 
 #  endregion
 
 # region load weight
-img_path = '../myInput/' + img_name
+img_path = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', img_name)
 # img_path = '../dataset/test/' + img_name
 
-path_mask_generator = 'results/' + run_name + '/mask_generator.pth'
-path_residue_predictor = 'results/' + run_name + '/residue_predictor.pth'
+path_mask_generator = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'model', 'mask_generator.pth')
+path_residue_predictor = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'model', 'residue_predictor.pth')
 
 if num_primary_color == 7:
     manual_colors = np.array([manual_color_0, manual_color_1, manual_color_2, manual_color_3,\
@@ -196,14 +199,12 @@ elif num_primary_color == 6:
 # endregion  
 
 # region mkdir
-try:
-    os.makedirs('results/%s/%s' % (run_name, img_name))
-except OSError:
-    pass
+save_path = os.path.join(current_dir, '..', '..', 'data', '2_fscs_output', img_name)
+os.makedirs(save_path, exist_ok=True)
 # endregion
 
 # region model
-test_dataset = MyDataset(csv_path, num_primary_color, mode='test')
+test_dataset = MyDataset(csv_path, csv_name, num_primary_color, mode='test')
 test_loader = torch.utils.data.DataLoader(
     test_dataset,
     batch_size=1,
@@ -331,16 +332,12 @@ with torch.no_grad():
         if True:
             # batchsizeは１で計算されているはず．それぞれ保存する．
             save_layer_number = 0
-            save_image(primary_color_layers[save_layer_number,:,:,:,:],
-                   'results/%s/%s/test' % (run_name, img_name) + '_img-%02d_primary_color_layers.png' % batch_idx)
-            save_image(reconst_img[save_layer_number,:,:,:].unsqueeze(0),
-                   'results/%s/%s/test' % (run_name, img_name)  + '_img-%02d_reconst_img.png' % batch_idx)
-            save_image(target_img[save_layer_number,:,:,:].unsqueeze(0),
-                   'results/%s/%s/test' % (run_name, img_name)  + '_img-%02d_target_img.png' % batch_idx)
+            save_image(primary_color_layers[save_layer_number,:,:,:,:], os.path.join(save_path, 'test_img-%02d_primary_color_layers.png' % batch_idx))
+            save_image(reconst_img[save_layer_number,:,:,:].unsqueeze(0), os.path.join(save_path, 'test_img-%02d_reconst_img.png' % batch_idx))
+            save_image(target_img[save_layer_number,:,:,:].unsqueeze(0), os.path.join(save_path, 'test_img-%02d_target_img.png' % batch_idx))
             
             ### my add
-            save_image(no_residue_reconst_img[save_layer_number,:,:,:].unsqueeze(0),
-                   'results/%s/%s/test' % (run_name, img_name)  + '_img-%02d_no_risidue_reconst_img.png' % batch_idx)
+            save_image(no_residue_reconst_img[save_layer_number,:,:,:].unsqueeze(0), os.path.join(save_path, 'test_img-%02d_no_risidue_reconst_img.png' % batch_idx))
 
             # RGBAの４chのpngとして保存する
             RGBA_layers = torch.cat((pred_unmixed_rgb_layers, processed_alpha_layers), dim=2) # out: bn, ln, 4, h, w
@@ -355,7 +352,7 @@ with torch.no_grad():
             # print('Saved to results/%s/%s/...' % (run_name, img_name))
 
             for i in range(len(RGBA_layers)):
-                save_image(RGBA_layers[i, :, :, :], 'results/%s/%s/img-%02d_layer-%02d.png' % (run_name, img_name, batch_idx, i) )
+                save_image(RGBA_layers[i, :, :, :], os.path.join(save_path, 'img-%02d_layer-%02d.png' % (batch_idx, i)))
                 
                 # layer = cv2.imread('results/%s/%s/img-%02d_layer-%02d.png' % (run_name, img_name, batch_idx, i), cv2.IMREAD_UNCHANGED)
                 # im1 = Image.open('results/%s/%s/img-%02d_layer-%02d.png' % (run_name, img_name, batch_idx, i))
@@ -363,7 +360,7 @@ with torch.no_grad():
                 # output = cv2.add(layer, layer)
                 # cv2.imwrite('output.png', output)
                 
-            print('Saved to results/%s/%s/...' % (run_name, img_name))
+            print(f'Saved to {save_path}')
             
             
         if False:
@@ -387,16 +384,18 @@ with torch.no_grad():
 
 # 処理まえのアルファを保存
 for i in range(len(pred_alpha_layers[0])):
-            save_image(pred_alpha_layers[0,i, :, :, :], 'results/%s/%s/pred-alpha-00_layer-%02d.png' % (run_name, img_name, i) )
+    save_image(pred_alpha_layers[0,i, :, :, :], os.path.join(save_path, 'pred-alpha-00_layer-%02d.png' % i) )
+    
             
 # 処理後のアルファの保存 processed_alpha_layers
 for i in range(len(processed_alpha_layers[0])):
-            save_image(processed_alpha_layers[0,i, :, :, :], 'results/%s/%s/proc-alpha-00_layer-%02d.png' % (run_name, img_name, i) )
-            
-            # layer = cv2.imread('results/%s/%s/proc-alpha-00_layer-%02d.png' % (run_name, img_name, i))
-            # blur = cv2.GaussianBlur(layer, (35, 35), 0)
-            # cv2.imwrite('results/%s/%s/proc-alpha-00_layer-%02d.png' % (run_name, img_name, i), blur)
+    save_image(processed_alpha_layers[0,i, :, :, :], os.path.join(save_path, 'proc-alpha-00_layer-%02d.png' % i))
+    
+    # layer = cv2.imread('results/%s/%s/proc-alpha-00_layer-%02d.png' % (run_name, img_name, i))
+    # blur = cv2.GaussianBlur(layer, (35, 35), 0)
+    # cv2.imwrite('results/%s/%s/proc-alpha-00_layer-%02d.png' % (run_name, img_name, i), blur)
 
 # 処理後のRGBの保存
 for i in range(len(pred_unmixed_rgb_layers[0])):
-    save_image(pred_unmixed_rgb_layers[0,i, :, :, :], 'results/%s/%s/rgb-00_layer-%02d.png' % (run_name, img_name, i) )
+    save_image(pred_unmixed_rgb_layers[0,i, :, :, :], os.path.join(save_path, 'rgb-00_layer-%02d.png' % i))
+    

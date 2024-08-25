@@ -57,11 +57,12 @@ if __name__ == "__main__":
     # base_dir_out = args.base_dir_out
     
     # for debugging
-    dir_name = 'human'
-    layer_dir = os.path.join('myInput', 'layer', dir_name)
-    mask_dir = os.path.join('myInput', 'mask', dir_name)
-    alpha_dir = os.path.join('myInput', 'alpha', dir_name)
-    base_dir_out = 'myOutput'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    dir_name = 'lotus'
+    layer_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'layer', dir_name)
+    mask_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'mask', dir_name)
+    alpha_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'alpha', dir_name)
+    base_dir_out = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_output')
     
     
     patch_output_dir = os.path.join(base_dir_out, 'patch', dir_name)
@@ -101,7 +102,7 @@ if __name__ == "__main__":
 
     
     # Copy mask files from myOutput to myInput
-    mask_src_dir = './myOutput/mask/' + dir_name + '/'
+    mask_src_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_output', 'mask', dir_name)
     for file in os.listdir(mask_src_dir):
         src_file = os.path.join(mask_src_dir, file)
         shutil.copy2(src_file, mask_dir)

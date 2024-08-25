@@ -1,5 +1,17 @@
 import { getDataList, mainColorNumber, PixelData, rgb2Hex } from "./shared.ts";
 import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+// 獲取當前模組的 URL 並轉換為檔案路徑
+let __filename = new URL(import.meta.url).pathname;
+
+// 如果在 Windows 上運行，路徑會包含前導的斜杠（`/`），需要去掉
+if (Deno.build.os === "windows") {
+  __filename = __filename.substring(1);
+}
+
+// 獲取當前文件所在的目錄
+const __dirname = path.dirname(__filename);
 
 const img_pair = await getDataList();
 const dataList = img_pair.dataList;
@@ -141,7 +153,12 @@ dataList.forEach((data, index) => {
   // });
 
   //output 到 txt
-  const outputFile = `../output/${imgName}.txt`;
+  const output_path = path.join(__dirname, `../../data/1_color_extraction_output/txt/`);
+  if (!fs.existsSync(output_path)) {
+    fs.mkdirSync(output_path, { recursive: true });
+  }
+    
+  const outputFile = `${output_path}${imgName}.txt`;
   const output = [
                     `img_name = '${imgName}.png';`,
                     ...result.map((color, i) => `manual_color_${i} = ${color[0]};`),

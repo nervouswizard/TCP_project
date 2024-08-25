@@ -66,9 +66,10 @@ if __name__ == "__main__":
     # num_groups = args.num_groups
     # threshold = args.threshold
     # for debugging
-    base_dir_in = os.path.join('myInput', 'depth')
-    base_dir_out = os.path.join('myOutput', 'mask')
-    dir_name = 'human'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir_in =  os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'depth')
+    base_dir_out = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_output', 'mask')
+    dir_name = 'lotus'
     num_groups = 5
     threshold = 0
     
