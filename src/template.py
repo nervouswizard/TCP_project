@@ -2,20 +2,21 @@ import bpy
 import os
 import math
 
-base_path = os.path.join('squirrel_new') ### image name
-layer_dir = os.path.join(base_path + 'layer')
-alpha_dir = os.path.join(base_path + 'alpha')
-background_dir = os.path.join(base_path + 'background')
+script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ncku', 'TCP_project', 'data', 'trans_data', 'show_in_blender')
+base_path = os.path.join(script_dir, 'guo_hua') ### image name
+layer_dir = os.path.join(base_path, 'layer')
+alpha_dir = os.path.join(base_path, 'alpha')
+background_dir = os.path.join(base_path, 'background')
 # project_name = 'human'
 
-layer_num = 10  ### mask number
+layer_num = 7  ### mask number
 depth_paths = [[] for _ in range(layer_num)]
 rgb_paths = [[] for _ in range(layer_num)]
 background_paths = []
 H = 0
 W = 0
 scale = 10  ### resize scale
-layer_offset = 0.25 ###
+layer_offset = 3 ###
 displace_strength = 11 ###
 
 # print(depth_paths)
@@ -155,9 +156,20 @@ for i in range(len(rgb_paths)):
         output_node.location = (400, 0)
 
         # Link the nodes
-        node_tree.links.new(image_texture_node.outputs[0], principled_bsdf_node.inputs[0])
-        node_tree.links.new(image_texture_node.outputs[1], principled_bsdf_node.inputs[21])
-        node_tree.links.new(principled_bsdf_node.outputs[0], output_node.inputs[0])
+        node_tree.links.new(image_texture_node.outputs["Color"], principled_bsdf_node.inputs["Base Color"])
+        node_tree.links.new(image_texture_node.outputs["Alpha"], principled_bsdf_node.inputs["Alpha"])
+        node_tree.links.new(principled_bsdf_node.outputs["BSDF"], output_node.inputs["Surface"])
+
+        # 在創建材質後添加這些檢查
+        print(f"材質 {i}-{j} 的混合方法: {mat.blend_method}")
+        print(f"Alpha 輸入連接狀態: {principled_bsdf_node.inputs['Alpha'].is_linked}")
+
+        # 檢查圖像是否有 alpha 通道
+        if image.channels == 4:
+            print(f"圖像 {rgb_paths[i][j]} 有 alpha 通道")
+        else:
+            print(f"警告：圖像 {rgb_paths[i][j]} 沒有 alpha 通道")
+
 # endregion
 
 # # region Camera

@@ -101,7 +101,7 @@ def frames_from_folder_to_video(input_folder, output_video, fps):
 
 if __name__ == '__main__':
     # Example usage
-    frames_folder = os.path.join('..', 'result')
+    frames_folder = os.path.join('..', 'data', 'trans_data', '20241010_guohua', 'y')
     output_name = 'test'
     fps = 13 # Set your desired fps
     output_video_path = os.path.join(frames_folder, output_name+f'_fps{fps}.mp4')
