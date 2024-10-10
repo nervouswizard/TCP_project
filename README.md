@@ -97,7 +97,9 @@ Any inpainting method which can remove the signature and stamp is fine. I use [i
     ```
 
 
-- Put TCP image into folder `data/2_fscs_input`, placing its mask in folder `data/2_fscs_input/mask`. Paste the primary colors into  `src/fscs/inference.py`.  
+- 1. Run `transfer_file.py` to put TCP image into folder `data/2_fscs_input`
+- 2. placing its mask in folder `data/2_fscs_input/mask`
+- 3. Paste the primary colors into  `src/fscs/inference.py`.  
 mask 的檔名需要做相對應的更改
     ```python
     mask_path = '../myInput/mask/'+ os.path.splitext(img_name)[0] + '_mask.png'

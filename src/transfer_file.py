@@ -3,6 +3,14 @@ import shutil
 
 current_dir = current_dir = os.path.dirname(os.path.abspath(__file__))
 
+def color_extraction_to_fscs():
+    from_path = os.path.join(current_dir, '..', 'data', '1_color_extraction_input')
+    to_path = os.path.join(current_dir, '..', 'data', '2_fscs_input')
+    os.makedirs(to_path, exist_ok=True)
+    for img_name in os.listdir(from_path):
+        img_path = os.path.join(from_path, img_name)
+        shutil.copy2(img_path, os.path.join(to_path, img_name))
+
 def fscs_to_depth_segment():
     from_path = os.path.join(current_dir, '..', 'data', '2_fscs_output')
     to_path = os.path.join(current_dir, '..', 'data', '3_depth_segment_input')
@@ -23,5 +31,8 @@ def fscs_to_depth_segment():
                     shutil.copy2(os.path.join(png_dir, png_file), os.path.join(to_path, 'layer', img_name))
 
 if __name__ == '__main__':
-    
-    fscs_to_depth_segment()
+    try:
+        color_extraction_to_fscs()
+        fscs_to_depth_segment()
+    except Exception as e:
+        pass
