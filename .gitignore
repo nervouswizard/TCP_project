@@ -2,3 +2,5 @@ virtual/
 *__pycache__
 *.png
 data/
+test/
+trans_data/
