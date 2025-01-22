@@ -4,6 +4,7 @@ from PIL import Image
 import sys
 import os
 import argparse
+import matplotlib.pyplot as plt
 
 np.set_printoptions(threshold=sys.maxsize)
 
@@ -69,9 +70,9 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
     base_dir_in =  os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'depth')
     base_dir_out = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_output', 'mask')
-    dir_name = 'lotus'
-    num_groups = 5
-    threshold = 0
+    dir_name = 'guo_hua'
+    num_groups = 10
+    threshold = 100
     
     
     

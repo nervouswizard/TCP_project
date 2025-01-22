@@ -23,6 +23,9 @@ def get_patch(layer_path, alpha_path, mask):
     layer = cv2.imread(layer_path, cv2.IMREAD_UNCHANGED)
     alpha = cv2.imread(alpha_path, cv2.IMREAD_ANYDEPTH)
 
+    # resize mask to the same size as layer
+    mask = cv2.resize(mask, (layer.shape[1], layer.shape[0]))
+
     patch = np.empty(layer.shape, dtype=np.uint8)
     patch_alpha = np.empty(alpha.shape, dtype=np.uint8)
     
@@ -58,7 +61,7 @@ if __name__ == "__main__":
     
     # for debugging
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    dir_name = 'lotus'
+    dir_name = 'guo_hua'
     layer_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'layer', dir_name)
     mask_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'mask', dir_name)
     alpha_dir = os.path.join(current_dir, '..', '..', 'data', '3_depth_segment_input', 'alpha', dir_name)

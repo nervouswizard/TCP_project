@@ -236,14 +236,14 @@ proc alpha 是較為平滑的alpha，論文就是用proc
 python src/transfer_file.py
 ```
 
-調整`depth_segment/depth_segment.py`  
+- 調整`depth_segment/depth_segment.py`  
 調整threshold  
 更改dir_name  
 跑depth_segment.py
 
-檢查`TCP_project\depth_segment\myOutput\mask\test`分割後的深度理想程度
+檢查`data\3_depth_segment_output\mask\[圖片名稱]\`分割後的深度理想程度
 
-調整`depth_segment/patch_segment.py`  
+- 調整`3_depth_segment/patch_segment.py`  
 更改dir_name  
 跑patch_segment.py
 
