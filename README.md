@@ -119,6 +119,8 @@ mask 的檔名需要做相對應的更改
     python inference.py
     ```
 
+- Some model data is in `need_data.zip`.
+
 ## Depth Map Generation
 
 - Set the config file to connect to `lab server 83`.

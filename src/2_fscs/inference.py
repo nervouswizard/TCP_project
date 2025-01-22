@@ -174,7 +174,7 @@ bound_flag = True
 # img_name = 'owl.png'; manual_color_0 = [252, 252, 252]; manual_color_1 = [247, 171, 167]; manual_color_2 = [169, 158, 255]; manual_color_3 = [170, 168, 156]; manual_color_4 = [163, 252, 170]; manual_color_5 = [221, 221, 178]; manual_color_6 = [168, 255, 214];
 # img_name = 'pandas.png'; manual_color_0 = [253, 253, 253]; manual_color_1 = [34, 27, 255]; manual_color_2 = [255, 31, 33]; manual_color_3 = [30, 33, 26]; manual_color_4 = [25, 253, 27]; manual_color_5 = [254, 160, 161]; manual_color_6 = [164, 159, 255];
 # img_name = 'sparrow.png'; manual_color_0 = [250, 250, 251]; manual_color_1 = [154, 160, 169]; manual_color_2 = [73, 73, 89]; manual_color_3 = [213, 87, 191]; manual_color_4 = [230, 159, 223]; manual_color_5 = [182, 202, 202]; manual_color_6 = [111, 114, 138];
-img_name = 'squirrel.png'; manual_color_0 = [239, 238, 234]; manual_color_1 = [97, 109, 108]; manual_color_2 = [197, 87, 101]; manual_color_3 = [180, 139, 116]; manual_color_4 = [122, 135, 135]; manual_color_5 = [55, 74, 82]; manual_color_6 = [214, 109, 139];
+img_name = 'guo_hua.png'; manual_color_0 = [234, 224, 218]; manual_color_1 = [189, 59, 65]; manual_color_2 = [229, 168, 163]; manual_color_3 = [18, 15, 15]; manual_color_4 = [96, 15, 16]; manual_color_5 = [230, 196, 186]; manual_color_6 = [97, 93, 89];
 
 target_layer_number = [0, 1] # マスクで操作するレイヤーの番号
 mask_path = os.path.join(current_dir, '..', '..', 'data', '2_fscs_input', 'mask', os.path.splitext(img_name)[0] + '_mask.png')
