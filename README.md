@@ -15,7 +15,13 @@ deno
 
 ### server
 
-unknown
+* Matte Anything (following by [Matte Anything](https://github.com/hustvl/Matte-Anything))
+    * conda
+    * python 3.10.16 
+    * cuda 12.4 
+    * torch 2.5.1
+    * delete all specific version in requirements.txt
+    * but keep gradio==3.46.1
 
 ## TCP Select
 
@@ -33,19 +39,18 @@ Select appropriate TCPs for running our code. 水墨畫 is suggested.
 
 ### Image Matting
 
-- Any matting method which can get the **mask of object** is fine. I use [Matte Anything](https://github.com/hustvl/Matte-Anything) in my thesis. And there is a virtual environment of it in `lab server 83`**.**
+- Any matting method which can get the **mask of object** is fine. I use [Matte Anything](https://github.com/hustvl/Matte-Anything) in my thesis. And there is a virtual environment of it in `lab server 83`.
     
     ```powershell
-    ssh cgvsl@140.116.247.73
-    (password: 12345)
-    conda activate pj_matteAnything
+    ssh P76134537@140.116.247.83
+    conda activate MatteAnything
     ```
     
 
 - Run the following command to activate the GUI.
     
     ```powershell
-    cd /home/cgvsl/p76111351/Matte-Anything
+    cd /sean/ncku/sean/p76111351/Matte-Anything
     python matte_anything.py
     ```
     
