@@ -22,6 +22,11 @@ deno
     * torch 2.5.1
     * delete all specific version in requirements.txt
     * but keep gradio==3.46.1
+* TCPdepth
+    * conda
+    * python 3.10.16 
+    * cuda 12.4 
+    * torch 2.5.1
 
 ## TCP Select
 
@@ -125,16 +130,10 @@ mask 的檔名需要做相對應的更改
 
 - Set the config file to connect to `lab server 83`.
     
-    ```powershell
-    Host LabServer83-cgvsl
-      HostName 140.116.247.83
-      User cgvsl
-    ```
-    
 - There is a virtual environment in `lab server 83`.
     
     ```powershell
-    conda activate pj_TCP_project
+    conda activate TCPdepth
     cd /home/cgvsl/p76111351/TCP_project
     ```
     
