@@ -263,26 +263,17 @@ python patch_segment.py
     <img src="https://github.com/user-attachments/assets/e47eb528-c357-47c5-8f00-b0ea51d39317">
     
 
-- Copy RGBA and alpha patches to **blender directory**.
+- 執行transfer_file.py
     
     ```powershell
-    mkdir /home/gliamanti/下載/human_new
-    mkdir /home/gliamanti/下載/human_new/layer
-    mkdir /home/gliamanti/下載/human_new/alpha
-    mkdir /home/gliamanti/下載/human_new/background
-    ```
-    
-    ```powershell
-    rm -r /home/gliamanti/下載/human_new/alpha/*
-    rm -r /home/gliamanti/下載/human_new/layer/*
-    rm -r /home/gliamanti/下載/human_new/background/*
-    
-    cp /home/gliamanti/myApps/depth_segment/myOutput/patch_alpha/human/* /home/gliamanti/下載/human_new/alpha
-    cp /home/gliamanti/myApps/depth_segment/myOutput/patch/human/* /home/gliamanti/下載/human_new/layer
-    cp /home/gliamanti/下載/scripting/overcast_soil_puresky_4k.exr /home/gliamanti/下載/human_new/background
+    python transfer_file.py
     ```
     
 
 - Open a `Blender` window, run the blender script `template.py`.
 
 <img src="https://github.com/user-attachments/assets/4e995219-2a9e-41f7-bbb2-d1c0bc406164">
+
+- 將產生出的Collection放複製至camera_x.blend
+
+- 修改output的輸出路徑

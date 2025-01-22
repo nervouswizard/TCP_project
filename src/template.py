@@ -2,14 +2,14 @@ import bpy
 import os
 import math
 
-script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ncku', 'TCP_project', 'data', 'trans_data', 'show_in_blender')
+script_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ncku', 'TCP_project', 'data', '4_blender_input')
 base_path = os.path.join(script_dir, 'guo_hua') ### image name
 layer_dir = os.path.join(base_path, 'layer')
 alpha_dir = os.path.join(base_path, 'alpha')
 background_dir = os.path.join(base_path, 'background')
 # project_name = 'human'
 
-layer_num = 7  ### mask number
+layer_num = 10  ### mask number
 depth_paths = [[] for _ in range(layer_num)]
 rgb_paths = [[] for _ in range(layer_num)]
 background_paths = []
