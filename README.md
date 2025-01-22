@@ -224,12 +224,12 @@ python generate_image.py --config "./configs/hyperparameter.yaml"
 
 執行 transfer_file.py
 
-transfer_file.py會把`fscs/src/results/sample/圖片名稱.png`資料夾內的alpha(七個圖片檔)  
-複製至`TCP_project/depth-segment/myInput/alpha/圖片名稱`  
+transfer_file.py會把`data/2_fscs_output/圖片名稱.png/`資料夾內的alpha(七個圖片檔)  
+複製至`data/3_depth_segment_input/`  
 proc alpha 是較為平滑的alpha，論文就是用proc  
 
-把`fscs/src/results/sample/圖片名稱.png`資料夾內的img_layer(七個圖片檔)  
-複製至`TCP_project/depth-segment/myInput/layer/圖片名稱`
+把`data/2_fscs_output/圖片名稱.png/`資料夾內的img_layer(七個圖片檔)  
+複製至`data/3_depth_segment_input/`
 
 
 ```powershell
