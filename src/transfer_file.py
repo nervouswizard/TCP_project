@@ -32,6 +32,7 @@ def fscs_to_depth_segment():
 
 if __name__ == '__main__':
     try:
+        os.makedirs(os.path.join(current_dir, '..', 'data', '2_fscs_input', 'mask'), exist_ok=True)
         color_extraction_to_fscs()
         fscs_to_depth_segment()
     except Exception as e:
